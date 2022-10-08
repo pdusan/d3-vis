@@ -1,9 +1,21 @@
 rect {
-    color: steelblue;
+    fill: steelblue;
     stroke: slategray;
+    stroke-width: 1px;
 }
 
 svg {
-    width: 80%;
+    width: 95%;
     height: 60%;
+}
+
+.svg-container {
+    height: 80%;
+    width: 95%;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
