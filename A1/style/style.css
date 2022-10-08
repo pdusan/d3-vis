@@ -1,0 +1,9 @@
+rect {
+    color: steelblue;
+    stroke: slategray;
+}
+
+svg {
+    width: 80%;
+    height: 60%;
+}
