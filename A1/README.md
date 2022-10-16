@@ -1,7 +1,7 @@
 # VIS Assignment 1 - Dusan Popovic 01651258
 
 All the functionality has been split into its corresponding files (html, css and js), with the main part of the assignment
-located in vis.js, inside the scripts folder. The remaining data and style folders contain the dataset and the stylesheet respectively.
+located in vis.js.
 
 Using d3, the provided data set is loaded in and the resulting bar chart is displayed.
 
