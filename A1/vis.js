@@ -38,7 +38,7 @@ svg
   .attr("x", 0)
   .attr("y", height / 2);
 
-d3.csv("../data/austria_most_visited_places_2018.csv").then((data) => {
+d3.csv("austria_most_visited_places_2018.csv").then((data) => {
   //loading and adjusting the data
   data.forEach((d) => {
     d.Visitors = +d.Visitors;
