@@ -1,6 +1,7 @@
 let svg = d3.select("#bar-container");
 
 let dims = {
+  //define dimensions for margins and bar width
   top: 30,
   bottom: 30,
   left: 45,
@@ -8,21 +9,21 @@ let dims = {
   band: 50,
 };
 
-let width =
+let width = //get the width and height of the svg, adjusted for margins
   document.getElementById("bar-container").clientWidth - dims.left - dims.right;
 let height =
   document.getElementById("bar-container").clientHeight -
   dims.top -
   dims.bottom;
 
-let xScale = d3.scaleBand().range([width - dims.left - dims.right, 0]);
+let xScale = d3.scaleBand().range([width - dims.left - dims.right, 0]); //define the axes and their range
 let yScale = d3.scaleLinear().range([height, 0]);
 
 let xAxis = d3.axisBottom().scale(xScale);
 let yAxis = d3.axisLeft().scale(yScale);
 
-let elements = svg
-  .append("g")
+let elements = svg //an extra element added to svg to hold axes and bars, used for moving the chard
+  .append("g") //to make space for the axis labels which are placed in the next few lines
   .attr("transform", "translate(" + dims.right + ", 0)");
 
 svg
@@ -38,6 +39,7 @@ svg
   .attr("y", height / 2);
 
 d3.csv("../data/austria_most_visited_places_2018.csv").then((data) => {
+  //loading and adjusting the data
   data.forEach((d) => {
     d.Visitors = +d.Visitors;
   });
@@ -48,10 +50,10 @@ d3.csv("../data/austria_most_visited_places_2018.csv").then((data) => {
   var min = d3.min(visits);
   var max = d3.max(visits);
 
-  yScale.domain([0, max + min]);
+  yScale.domain([0, max + min]); //setting the axis domains (domain of y set to min+max, to allow for better result visibility)
   xScale.domain(places);
 
-  elements
+  elements //placing all the elements onto the svg
     .append("g")
     .call(yAxis)
     .attr("class", "axis")
