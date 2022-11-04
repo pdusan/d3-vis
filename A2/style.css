@@ -1,0 +1,37 @@
+.line {
+    stroke: steelblue;
+    stroke-width: 1px;
+}
+
+.selected {
+    stroke: orange;
+    stroke-width: 3px;
+}
+
+.hidden {
+    stroke: slategray;
+    opacity: 20;
+}
+
+svg {
+    width: 95%;
+    height: 60%;
+}
+
+.svg-container {
+    height: 80%;
+    width: 95%;
+    margin: 0 auto;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+    font-family: sans-serif;
+}
