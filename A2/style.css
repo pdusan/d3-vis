@@ -8,9 +8,14 @@
     stroke-width: 3px;
 }
 
-.hidden {
+#lines-container:has(.hidden) path.hidden {
     stroke: slategray;
-    opacity: 20;
+    opacity: 0.3;
+}
+
+#brush-container:has(.hidden) path.hidden {
+    stroke: steelblue;
+    stroke-width: 1px;
 }
 
 svg {
