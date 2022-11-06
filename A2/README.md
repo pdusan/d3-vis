@@ -21,7 +21,7 @@ The relevant hover and mouse click functions have then been added, with the text
 this makes sure that the text label always shows next to the corresponding country (the svg is not adaptable, so the labels may overlap the lines on narrow screens).
 For the mouse click highlight, colour changes and text label additions / removals are done by tracking element ids.
 
-For better visibility when mousing over / selecting a country, the colour and opacity changes are done by manipulating the classes of the relevant lines and changing their attributes by using the css :has() selector (can be seen in style.css). This should work on current versions of Chrome and Firefox.
+For better visibility when mousing over / selecting a country, the colour and opacity changes are done by manipulating the classes of the relevant lines and changing their attributes by using the css :has() selector (can be seen in style.css). This should work on current versions of Chrome and Firefox (for Firefox, the layout.css.has-selector.enabled flag needs to be set to true in about::flags if not already, since the course website says that the testing would be done with Chrome / Firefox, I recommend sticking to Chrome for the best "out of the box" experience).
 
 The brushable context area was added below the main chart. After each brush, the x axis ticks are reformatted, so that the correct ammount of ticks is displayed. 
 Before each brush action, the xScale domain is reset, so that the correct selection area is always shown. Double clicking the brushable area resets the line chart.
