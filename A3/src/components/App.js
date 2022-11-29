@@ -42,6 +42,7 @@ function niceData(data, name) {
 
 function App() {
   const [data, setData] = useState();
+  const [year, setYear] = useState();
 
   // Both data sets are loaded and transformed according to the above defined function
   // and then "manually" deep merged, so that each state has a series of years and their
@@ -66,9 +67,9 @@ function App() {
 
   return (
     <div>
-      <Choropleth />
-      <ScatterPlot />
-      <Slider />
+      <Choropleth map={mapStatesUsa} year={year} />
+      <ScatterPlot year={year} />
+      <Slider update={setYear} />
     </div>
   );
 }
