@@ -54,9 +54,9 @@ function App() {
         d3.csv(income).then((s) => {
           let temp = niceData(s, "income");
           temp.forEach((i) => {
-            let state = set.filter((o) => o.State === i.State);
+            let state = set.find((o) => o.state === i.state);
             for (let k = 0; k < i.values.length; k++) {
-              state[0].values[k].income = i.values[k].income;
+              state.values[k].income = i.values[k].income;
             }
           });
           setData(set);
