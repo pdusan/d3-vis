@@ -44,6 +44,8 @@ const globals = {
     bot: 20,
     left: 20,
     right: 20,
+    width: 1920,
+    height: 1080,
   },
   colours: {
     0: {
