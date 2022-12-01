@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-export default function Slider({ update }) {
+export default function Slider({ update, updateFunc }) {
   const changeYear = function (event) {
-    update(event.target.value);
+    update(updateFunc(event.target.value));
   };
 
   useEffect(() => {
-    update(1984);
+    update(updateFunc(1984));
   }, []);
 
   return (
