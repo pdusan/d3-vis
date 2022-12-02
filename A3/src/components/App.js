@@ -41,9 +41,9 @@ function niceData(data, name) {
 const globals = {
   dims: {
     top: 20,
-    bot: 20,
-    left: 20,
-    right: 20,
+    bot: 50,
+    left: 50,
+    right: 50,
     width: 1920,
     height: 1080,
   },
@@ -64,6 +64,12 @@ const globals = {
       2: "#d1a045",
     },
   },
+  abs: {
+    burgMax: "",
+    burgMin: "",
+    incMax: "",
+    incMin: "",
+  },
 };
 
 export const dimsContext = React.createContext();
@@ -72,6 +78,9 @@ export default function App() {
   const [data, setData] = useState();
   const [loaded, setLoaded] = useState(false);
   const [activeData, setActiveData] = useState();
+  const [xScale, setXScale] = useState(() => {});
+  const [yScale, setYScale] = useState(() => {});
+  const [scatterLoaded, setScatterLoaded] = useState(false);
 
   const getActive = function (year) {
     let activeStates = [];
@@ -102,20 +111,47 @@ export default function App() {
             }
           });
           setData(set);
+
           setLoaded(true);
         })
       );
   }, []);
 
+  if (loaded) {
+    let burgMax = d3.max(
+      data.map((d) => d3.max(d.values.map((s) => s.burglary)))
+    );
+    let burgMin = d3.min(
+      data.map((d) => d3.min(d.values.map((s) => s.burglary)))
+    );
+    let incMax = d3.max(data.map((d) => d3.max(d.values.map((s) => s.income))));
+    let incMin = d3.min(data.map((d) => d3.min(d.values.map((s) => s.income))));
+    globals.abs.burgMax = burgMax;
+    globals.abs.burgMin = burgMin;
+    globals.abs.incMax = incMax;
+    globals.abs.incMin = incMin;
+  }
+
   return (
-    <dimsContext.Provider value={globals}>
-      {loaded && (
-        <div>
-          <Choropleth />
-          <ScatterPlot data={activeData} />
-          <Slider update={setActiveData} updateFunc={getActive} />
+    loaded && (
+      <dimsContext.Provider value={globals}>
+        <div className="container-fluid d-flex h-100 flex-column">
+          <div className="row h-75">
+            <ScatterPlot
+              data={activeData}
+              setX={setXScale}
+              setY={setYScale}
+              setScatterLoaded={setScatterLoaded}
+            />
+            {scatterLoaded && (
+              <Choropleth data={activeData} xScale={xScale} yScale={yScale} />
+            )}
+          </div>
+          <div className="row">
+            <Slider update={setActiveData} updateFunc={getActive} />
+          </div>
         </div>
-      )}
-    </dimsContext.Provider>
+      </dimsContext.Provider>
+    )
   );
 }

@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.point {
+  stroke: gray;
+  stroke-width: 2px;
+  fill: white;
+}
+
+.selected-dot {
+  stroke: steelblue;
+  stroke-width: 2px;
+  fill: rgb(20, 238, 20);
+}
+
+#dots:has(.hidden) circle.hidden {
+  stroke: slategray;
+  opacity: 0.3;
+}
+
+.state-label {
+  font-family: sans-serif;
+  font-weight: bolder;
+}
