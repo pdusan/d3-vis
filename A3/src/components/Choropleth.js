@@ -49,6 +49,8 @@ export default function Choropleth({ data, xScale, yScale }) {
     return globals.colours[j][i];
   }
 
+  console.log(d3.selectAll(".selected-dot"));
+
   return (
     <div className="col-md-6">
       <svg id="choro-svg" className="w-100 h-100">

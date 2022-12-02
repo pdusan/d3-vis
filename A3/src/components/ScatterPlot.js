@@ -33,6 +33,7 @@ export default function ScatterPlot({ data, setX, setY, setScatterLoaded }) {
     drawColours();
     makeXAxis();
     makeYAxis();
+    makeBrush();
     setLoaded(true);
   };
 
@@ -94,6 +95,53 @@ export default function ScatterPlot({ data, setX, setY, setScatterLoaded }) {
       .on("mouseout", unhighlight);
   }
 
+  function makeBrush() {
+    let selected;
+    let brush = d3
+      .brush()
+      .extent([
+        [0, 0],
+        [width, height],
+      ])
+      .on("start brush", () => {
+        let bounds = d3.brushSelection(d3.select("#brush").node());
+        let xs = [];
+        d3.selectAll(".point")._groups[0].forEach((d) =>
+          xs.push(d.cx.baseVal.value)
+        );
+        let ys = [];
+        d3.selectAll(".point")._groups[0].forEach((d) =>
+          ys.push(d.cy.baseVal.value)
+        );
+        let validX = xs.filter((x) => {
+          if (bounds[0][0] <= x && x <= bounds[1][0]) return true;
+          else return false;
+        });
+        let validY = xs.filter((y) => {
+          if (bounds[0][1] <= y && y <= bounds[1][1]) return true;
+          else return false;
+        });
+        d3.selectAll(".point")._groups.forEach((p) => {
+          [...p].forEach((q) => {
+            let x = q.cx.baseVal.value;
+            let y = q.cy.baseVal.value;
+            if (
+              bounds[0][0] <= x &&
+              x <= bounds[1][0] &&
+              bounds[0][1] <= y &&
+              y <= bounds[1][1]
+            ) {
+              q.classList.add("selected-dot");
+            } else {
+              q.classList.remove("selected-dot");
+            }
+          });
+        });
+      });
+
+    d3.select("#brush").attr("class", "brushing").call(brush);
+  }
+
   const mouseOver = function (event, d) {
     d3.select("#dots")
       .append("text")
@@ -129,10 +177,10 @@ export default function ScatterPlot({ data, setX, setY, setScatterLoaded }) {
       <svg id="scatter-svg" className="w-100 h-100">
         <g id="scatter-container">
           <g id="colours" />
-          <g id="dots" />
           <g id="axis-x" />
           <g id="axis-y" />
           <g id="brush" />
+          <g id="dots" />
         </g>
       </svg>
     </div>
