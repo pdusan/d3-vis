@@ -18,9 +18,7 @@ export default function App() {
   return (
     <div>
       <DatePicker passDate={setDate} />
-      <button type="button" onClick={() => console.log(date)}>
-        TEST
-      </button>
+      {/* <span>{date.toDateString()}</span> */}
       <ScatterPlot
         data={data}
         selectedCountry={selectedCountry}
