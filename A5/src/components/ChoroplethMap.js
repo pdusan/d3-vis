@@ -6,8 +6,8 @@ import mapData from "../resources/custom.geo.json";
 
 export default function ChoroplethMap({
   data,
-  width = 1000,
-  height = 500,
+  width = 1200,
+  height = 400,
   setSelectedCountry,
 }) {
   function zooming(event) {
@@ -65,7 +65,7 @@ export default function ChoroplethMap({
       var legend = d3
         .select("#choro-container")
         .selectAll("g.item")
-        .attr("transform", "translate(-150,270)")
+        .attr("transform", "translate(-150,180)")
         .data(colorScale.range().reverse())
         .enter()
         .append("g")
@@ -124,7 +124,6 @@ export default function ChoroplethMap({
   }, [data]);
 
   const countryClick = function (d) {
-    d3.selectAll(".selected").attr("class", "country");
     d3.selectAll(".country")
       .style("opacity", 0.5)
       .style("stroke", "transparent")
@@ -150,14 +149,9 @@ export default function ChoroplethMap({
       .style("stroke", "transparent");
   };
 
-  const deselect = function () {
-    d3.selectAll(".selected").attr("class", "country");
-    d3.selectAll(".not-selected").attr("class", "country");
-  };
-
   return (
-    <div>
-      <h2>Worldwide Reproduction Rate</h2>
+    <div className="col-8 align-items-center">
+      <h2 style={{ textAlign: "center" }}>Worldwide COVID Reproduction Rate</h2>
       <svg id="choro-svg" width={width} height={height}>
         <g id="choro-container">
           <g id="choropleth" />
